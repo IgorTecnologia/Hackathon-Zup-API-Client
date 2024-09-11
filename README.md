@@ -59,8 +59,9 @@ A API de User gerencia os usuários do sistema e permite:
 - [API Endpoints](#api-endpoints)
 - [Database](#database)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
 - [Observation](#observation)
+- [Contributing](#contributing)
+
 
 ## Installation
 
