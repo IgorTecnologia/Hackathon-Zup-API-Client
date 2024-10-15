@@ -55,7 +55,7 @@ public class PersonResource {
     }
 
     @GetMapping(value = "/income/{income}")
-    public ResponseEntity<Page<PersonDTO>> findAllPagedByIncome(@PathVariable int income, Pageable pageable){
+    public ResponseEntity<Page<PersonDTO>> findAllPagedByIncome(@PathVariable double income, Pageable pageable){
 
         Page<PersonDTO> page = service.findAllPagedByIncome(income, pageable);
         return ResponseEntity.ok().body(page);
