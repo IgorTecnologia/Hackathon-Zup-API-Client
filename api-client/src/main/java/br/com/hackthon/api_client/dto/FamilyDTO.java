@@ -12,7 +12,7 @@ import java.util.*;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class FamilyDTO extends RepresentationModel<FamilyDTO> {
+public class FamilyDTO extends RepresentationModel<FamilyDTO>  {
 
     private UUID id;
 
