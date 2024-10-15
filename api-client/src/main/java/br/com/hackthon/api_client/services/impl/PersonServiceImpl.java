@@ -36,6 +36,9 @@ public class PersonServiceImpl implements PersonService {
     public Page<PersonDTO> findAllPagedByFirstName(String firstName, Pageable pageable) {
 
         Page<Person> page = repository.findAllPagedByFirstNameContainingIgnoreCase(firstName, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("FirstName not found: " + firstName);
+        }
         return page.map(x -> new PersonDTO(x, x.getFamily()));
     }
 
@@ -44,6 +47,9 @@ public class PersonServiceImpl implements PersonService {
     public Page<PersonDTO> findAllPagedByLastName(String lastName, Pageable pageable) {
 
         Page<Person> page = repository.findAllPagedByLastNameContainingIgnoreCase(lastName, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("LastName not found: " + lastName);
+        }
         return page.map(x -> new PersonDTO(x, x.getFamily()));
     }
 
@@ -52,6 +58,9 @@ public class PersonServiceImpl implements PersonService {
     public Page<PersonDTO> findAllPagedByAge(int age, Pageable pageable) {
 
         Page<Person> page = repository.findAllPagedByAge(age, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("Age not found: " + age);
+        }
         return page.map(x -> new PersonDTO(x, x.getFamily()));
     }
 
@@ -60,6 +69,9 @@ public class PersonServiceImpl implements PersonService {
     public Page<PersonDTO> findAllPagedByIncome(double income, Pageable pageable) {
 
         Page<Person> page = repository.findAllPagedByIncome(income, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("income not found: " + income);
+        }
         return page.map(x -> new PersonDTO(x, x.getFamily()));
     }
 
@@ -67,6 +79,9 @@ public class PersonServiceImpl implements PersonService {
     public Page<PersonDTO> findAllPagedByCpf(String cpf, Pageable pageable) {
 
         Page<Person> page = repository.findAllPagedByCpfContainingIgnoreCase(cpf, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("cpf not found: " + cpf);
+        }
         return page.map(x -> new PersonDTO(x, x.getFamily()));
     }
 
