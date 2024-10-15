@@ -44,4 +44,18 @@ public class Family implements Serializable {
 
     @OneToMany(mappedBy = "family", cascade = {CascadeType.ALL, CascadeType.PERSIST})
     List<Children> children = new ArrayList<>();
+
+    public Family(){
+
+    }
+
+    public Family(UUID id, String lastName, String state, String city, String street, Integer addressNumber, LocalDateTime collectionDate) {
+        this.id = id;
+        this.lastName = lastName;
+        this.state = state;
+        this.city = city;
+        this.street = street;
+        this.addressNumber = addressNumber;
+        this.collectionDate = collectionDate;
+    }
 }
