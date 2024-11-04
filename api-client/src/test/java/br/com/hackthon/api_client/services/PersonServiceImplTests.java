@@ -250,7 +250,7 @@ public class PersonServiceImplTests {
 
         service.deleteById(id);
 
-        Assertions.assertEquals(5, repository.count());
+        Assertions.assertEquals(4, repository.count());
     }
 
     @Test
