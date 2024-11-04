@@ -47,5 +47,15 @@ public class Factory {
 
         return dto;
     }
+
+    public static FamilyDTO createdFamilyDto(){
+
+        UUID id = UUID.randomUUID();
+
+        FamilyDTO dto = new FamilyDTO(id, "Braga Luiz", "SP", "São Paulo", "Soares de Lima", 77, LocalDateTime.now(), LocalDateTime.now());
+
+        return dto;
+
+    }
 }
 
