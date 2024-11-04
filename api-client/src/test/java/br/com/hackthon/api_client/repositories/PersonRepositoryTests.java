@@ -176,19 +176,19 @@ public class PersonRepositoryTests {
     }
 
     @Test
-    public void findByIdShouldReturnPersonWhenIdExists(){
+    public void findByIdShouldReturnPersonByIdWhenIdExists(){
 
-        UUID id = UUID.randomUUID();
+        Optional<Person> obj = repository.findAll().stream().findFirst();
 
-        Optional<Person> obj = repository.findById(id);
+        UUID id = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + obj.get().getId())).getId();
 
-        Assertions.assertNotNull(obj);
+        Optional<Person> optional = repository.findById(id);
 
-        System.out.println("RandomUUID: " + id);
+        Assertions.assertFalse(optional.isEmpty());
     }
 
     @Test
-    public void findByIdShouldReturnOptionalEmptyWhenIdNonExisting(){
+    public void findByIdShouldThrowResourceNotFoundExceptionWhenIdNonExisting(){
 
         UUID id  = UUID.fromString("78ce830a-c0c8-43b0-83cf-ca061fd7a60d");
 
@@ -213,13 +213,15 @@ public class PersonRepositoryTests {
         }
 
         @Test
-        public void deleteByIdShouldDeleteObjectWhenIdExists(){
+        public void deleteByIdShouldDeletePersonByIdWhenIdExists(){
 
-            UUID id = UUID.randomUUID();
+            Optional<Person> obj = repository.findAll().stream().findFirst();
+
+            UUID id = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + obj.get().getId())).getId();
 
             repository.deleteById(id);
 
-            Assertions.assertEquals(5, repository.count());
+            Assertions.assertEquals(4, repository.count());
         }
 
         @Test
