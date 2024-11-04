@@ -50,6 +50,17 @@ public class FamilyDTO extends RepresentationModel<FamilyDTO>  {
     public FamilyDTO(){
     }
 
+    public FamilyDTO(UUID id, String lastName, String state, String city, String street, Integer addressNumber, LocalDateTime collectionDate, LocalDateTime lastUpdateDate) {
+        this.id = id;
+        this.lastName = lastName;
+        this.state = state;
+        this.city = city;
+        this.street = street;
+        this.addressNumber = addressNumber;
+        this.collectionDate = collectionDate;
+        this.lastUpdateDate = lastUpdateDate;
+    }
+
     public FamilyDTO(Family entity){
 
         id = entity.getId();
@@ -76,4 +87,5 @@ public class FamilyDTO extends RepresentationModel<FamilyDTO>  {
         }
 
     }
+
 }
