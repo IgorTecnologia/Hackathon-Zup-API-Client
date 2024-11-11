@@ -39,6 +39,9 @@ public class FamilyServiceImpl implements FamilyService {
     public Page<FamilyDTO> findAllPagedByLastName(String lastName, Pageable pageable) {
 
         Page<Family> page = repository.findAllPagedByLastNameContainingIgnoreCase(lastName, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("Last name not found: " + lastName);
+        }
         return page.map(x -> new FamilyDTO(x, x.getMembers(), x.getChildren()));
     }
 
@@ -47,6 +50,9 @@ public class FamilyServiceImpl implements FamilyService {
     public Page<FamilyDTO> findByState(String state, Pageable pageable) {
 
         Page<Family> page = repository.findAllPagedByStateContainingIgnoreCase(state, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("State not found: " + state);
+        }
         return page.map(x -> new FamilyDTO(x, x.getMembers(), x.getChildren()));
     }
 
@@ -55,6 +61,9 @@ public class FamilyServiceImpl implements FamilyService {
     public Page<FamilyDTO> findByCity(String city, Pageable pageable) {
 
         Page<Family> page = repository.findAllPagedByCityContainingIgnoreCase(city, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("City not found: " + city);
+        }
         return page.map(x -> new FamilyDTO(x, x.getMembers(), x.getChildren()));
     }
 
