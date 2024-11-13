@@ -38,4 +38,18 @@ public class Children {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "family_id")
     private Family family;
+
+    public Children(){
+    }
+
+    public Children(UUID id, String firstName, String lastName, LocalDate dateBirth, Integer age, String cpf, LocalDateTime collectionDate) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateBirth = dateBirth;
+        this.age = age;
+        this.cpf = cpf;
+        this.collectionDate = collectionDate;
+    }
+
 }
