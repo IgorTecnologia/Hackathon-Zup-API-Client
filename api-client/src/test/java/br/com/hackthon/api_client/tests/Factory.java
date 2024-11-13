@@ -30,6 +30,14 @@ public class Factory {
         return entity;
     }
 
+    public static Children createdChildren(){
+
+        UUID id = UUID.randomUUID();
+
+        Children entity = new Children(id, "Lucas", "Guitierres", LocalDate.of(2005, 1 , 1), 19, "123.456.789-11", LocalDateTime.now());
+        return entity;
+    }
+
     public static PersonDTO createdPersonDtoUpdate() {
 
         UUID id = UUID.randomUUID();
