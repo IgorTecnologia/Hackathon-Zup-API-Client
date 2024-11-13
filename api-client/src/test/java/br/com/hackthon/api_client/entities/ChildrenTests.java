@@ -1,7 +1,6 @@
 package br.com.hackthon.api_client.entities;
 
 import org.junit.jupiter.api.*;
-import org.springframework.cglib.core.*;
 
 import java.time.*;
 import java.util.*;
