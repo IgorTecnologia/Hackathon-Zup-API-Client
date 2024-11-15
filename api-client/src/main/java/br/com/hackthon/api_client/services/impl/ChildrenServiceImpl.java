@@ -37,6 +37,9 @@ public class ChildrenServiceImpl implements ChildrenService {
     public Page<ChildrenDTO> findAllPagedByFirstName(String firstName, Pageable pageable) {
 
         Page<Children> page = repository.findAllPagedByFirstNameContainingIgnoreCase(firstName, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("First name not found: " + firstName);
+        }
         return page.map(x -> new ChildrenDTO(x, x.getFamily()));
     }
 
@@ -45,6 +48,9 @@ public class ChildrenServiceImpl implements ChildrenService {
     public Page<ChildrenDTO> findAllPagedByLastName(String lastName, Pageable pageable) {
 
         Page<Children> page = repository.findAllPagedByLastNameContainingIgnoreCase(lastName, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("Last name not found: " + lastName);
+        }
         return page.map(x -> new ChildrenDTO(x, x.getFamily()));
     }
 
@@ -53,6 +59,9 @@ public class ChildrenServiceImpl implements ChildrenService {
     public Page<ChildrenDTO> findAllPagedByAge(int age, Pageable pageable) {
 
         Page<Children> page = repository.findAllPagedByAge(age, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("Age not found: " + age);
+        }
         return page.map(x -> new ChildrenDTO(x, x.getFamily()));
     }
 
@@ -61,6 +70,9 @@ public class ChildrenServiceImpl implements ChildrenService {
     public Page<ChildrenDTO> findAllPagedByCpf(String cpf, Pageable pageable) {
 
         Page<Children> page = repository.findAllPagedByCpfContainingIgnoreCase(cpf, pageable);
+        if(page.isEmpty()){
+            throw new ResourceNotFoundException("CPF not found: " + cpf);
+        }
         return page.map(x -> new ChildrenDTO(x, x.getFamily()));
     }
 
