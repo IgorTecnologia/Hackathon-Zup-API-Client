@@ -44,6 +44,16 @@ public class ChildrenDTO extends RepresentationModel<ChildrenDTO> {
     public ChildrenDTO(){
     }
 
+    public ChildrenDTO(UUID id, String firstName, String lastName, LocalDate dateBirth, Integer age, String cpf, LocalDateTime collectionDate) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateBirth = dateBirth;
+        this.age = age;
+        this.cpf = cpf;
+        this.collectionDate = collectionDate;
+    }
+
     public ChildrenDTO(Children entity){
 
         id = entity.getId();
