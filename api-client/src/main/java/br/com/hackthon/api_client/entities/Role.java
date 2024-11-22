@@ -18,4 +18,12 @@ public class Role {
 
     @Column(nullable = false, length = 70, unique = true)
     private String authority;
+
+    public Role(){
+    }
+
+    public Role(UUID id, String authority) {
+        this.id = id;
+        this.authority = authority;
+    }
 }
