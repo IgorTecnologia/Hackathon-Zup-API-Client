@@ -90,5 +90,21 @@ public class Factory {
         Role entity = new Role(id,"Seller");
         return entity;
     }
+
+    public static RoleDTO createdRoleDtoToInsert(){
+
+        UUID id = UUID.randomUUID();
+        RoleDTO dto = new RoleDTO(id, "Assistent");
+
+        return dto;
+    }
+
+    public static RoleDTO createdRoleDtoToUpdate(){
+
+        UUID id = UUID.randomUUID();
+        RoleDTO dto = new RoleDTO(id, "Partner");
+
+        return dto;
+    }
 }
 
