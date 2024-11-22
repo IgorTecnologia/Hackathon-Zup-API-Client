@@ -28,6 +28,11 @@ public class RoleDTO extends RepresentationModel<RoleDTO> {
     public RoleDTO() {
     }
 
+    public RoleDTO(UUID id, String authority) {
+        this.id = id;
+        this.authority = authority;
+    }
+
     public RoleDTO(Role entity) {
 
         id = entity.getId();
