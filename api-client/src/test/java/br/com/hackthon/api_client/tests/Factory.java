@@ -82,5 +82,13 @@ public class Factory {
         ChildrenDTO dto = new ChildrenDTO(id, "Francisco", "Ferraz", LocalDate.of(2004, 3,3), 20, "742.218.630-58", LocalDateTime.now());
         return dto;
     }
+
+    public static Role createdRole(){
+
+        UUID id = UUID.randomUUID();
+
+        Role entity = new Role(id,"Seller");
+        return entity;
+    }
 }
 
