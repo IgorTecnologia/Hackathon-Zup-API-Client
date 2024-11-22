@@ -2,6 +2,7 @@ package br.com.hackthon.api_client.resources.exceptions;
 
 import br.com.hackthon.api_client.services.exceptions.*;
 import jakarta.servlet.http.*;
+import org.springframework.dao.*;
 import org.springframework.http.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.*;
@@ -45,6 +46,22 @@ public class ResourceExceptionHandler {
         for(FieldError f : e.getBindingResult().getFieldErrors()){
             err.addError(f.getField(), f.getDefaultMessage());
         }
+
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> database(DataIntegrityViolationException e, HttpServletRequest request){
+
+        StandardError err = new StandardError();
+
+        HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+
+        err.setTimeStamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Data Base Exception");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
 
         return ResponseEntity.status(status).body(err);
     }
