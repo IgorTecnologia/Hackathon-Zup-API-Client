@@ -23,6 +23,7 @@ public class RoleDTO extends RepresentationModel<RoleDTO> {
     @Size(min = 4, max = 70, message = "Minimum characters 4 and maximum 70.")
     @NotNull(message = "The authority field is mandatory.")
     @AuthorityConstraint(message = "Invalid authority, already exists.")
+    @JsonView({RoleView.RegistrationPost.class, RoleView.RolePut.class})
     private String authority;
 
     public RoleDTO() {
