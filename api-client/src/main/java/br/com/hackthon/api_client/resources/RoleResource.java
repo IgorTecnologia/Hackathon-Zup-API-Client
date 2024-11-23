@@ -49,7 +49,7 @@ public class RoleResource {
 
     @PostMapping
     public ResponseEntity<RoleDTO> insert(@JsonView(RoleDTO.RoleView.RegistrationPost.class)
-                                          @Validated({RoleDTO.RoleView.RegistrationPost.class})
+                                          @Validated(RoleDTO.RoleView.RegistrationPost.class)
                                           @RequestBody RoleDTO dto){
 
         dto = service.insert(dto);
