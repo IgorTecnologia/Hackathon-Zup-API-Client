@@ -3,6 +3,7 @@ package br.com.hackthon.api_client.resources;
 import br.com.hackthon.api_client.dto.*;
 import br.com.hackthon.api_client.services.impl.*;
 import com.fasterxml.jackson.annotation.*;
+import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
@@ -62,7 +63,9 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@RequestBody UserDTO dto){
+    public ResponseEntity<UserDTO> insert(@JsonView(UserDTO.UserView.registrationPost.class)
+                                          @Validated(UserDTO.UserView.registrationPost.class)
+                                          @RequestBody @Valid UserDTO dto){
 
         dto = service.insert(dto);
         return ResponseEntity.ok().body(dto);
