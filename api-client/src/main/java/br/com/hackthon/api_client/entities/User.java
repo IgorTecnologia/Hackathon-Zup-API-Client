@@ -24,7 +24,7 @@ public class User {
     private String email;
 
     @JsonIgnore
-    @Column(nullable = false, length = 255 )
+    @Column(nullable = false, length = 257 )
     private String password;
 
     @Column(nullable = false, length = 150 )
@@ -51,4 +51,20 @@ public class User {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
+    public User(){
+    }
+
+    public User(UUID id, String username, String email, String password, String fullName, String phoneNumber, String cpf, String imageUrl,
+                LocalDateTime collectionDate, LocalDateTime lastUpdateDate) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.cpf = cpf;
+        this.imageUrl = imageUrl;
+        this.collectionDate = collectionDate;
+        this.lastUpdateDate = lastUpdateDate;
+    }
 }
