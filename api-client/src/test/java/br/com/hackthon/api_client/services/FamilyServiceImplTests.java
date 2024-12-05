@@ -145,7 +145,7 @@ public class FamilyServiceImplTests {
      @Test
      public void insertShouldSaveFamilyWhenCorrectStructure(){
 
-        FamilyDTO dto = Factory.createdFamilyDto();
+        FamilyDTO dto = Factory.createdFamilyDtoToInsert();
 
         dto = service.insert(dto);
 
@@ -160,7 +160,7 @@ public class FamilyServiceImplTests {
 
         UUID id = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + obj.get().getId())).getId();
 
-        FamilyDTO dto = Factory.createdFamilyDto();
+        FamilyDTO dto = Factory.createdFamilyDtoToInsert();
 
         dto = service.update(id, dto);
 
@@ -169,6 +169,17 @@ public class FamilyServiceImplTests {
         Assertions.assertEquals(5, repository.count());
      }
 
+     @Test
+     public void updateShouldThrowResourceNotFoundExceptionWhenIdNonExisting(){
+
+        UUID id = UUID.randomUUID();
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            FamilyDTO dto = Factory.createdFamilyDtoToUpdate();
+            dto = service.update(id, dto);
+            throw new ResourceNotFoundException("Id not found: " + id);
+        });
+     }
 
      @Test
      public void deleteByIdShouldDeleteFamilyByIdWhenIdExisting(){
@@ -180,5 +191,16 @@ public class FamilyServiceImplTests {
         service.deleteById(id);
 
         Assertions.assertEquals(4, repository.count());
+     }
+
+     @Test
+     public void deleteByIdShouldThrowResourceNotFoundExceptionWhenIdNonExisting(){
+
+        UUID id = UUID.randomUUID();
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            service.deleteById(id);
+            throw new ResourceNotFoundException("Id not found: " + id);
+        });
      }
 }
