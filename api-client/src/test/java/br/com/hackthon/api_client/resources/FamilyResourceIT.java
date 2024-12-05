@@ -151,7 +151,7 @@ public class FamilyResourceIT {
     @Test
     public void insertShouldSaveObjectWhenCorrectStructure() throws Exception {
 
-        FamilyDTO dto = Factory.createdFamilyDto();
+        FamilyDTO dto = Factory.createdFamilyDtoToInsert();
 
         String jsonBody = mapper.writeValueAsString(dto);
 
@@ -174,7 +174,7 @@ public class FamilyResourceIT {
 
         UUID id = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + obj.get().getId())).getId();
 
-        FamilyDTO dto = Factory.createdFamilyDto();
+        FamilyDTO dto = Factory.createdFamilyDtoToInsert();
 
         String jsonBody = mapper.writeValueAsString(dto);
 
@@ -196,7 +196,7 @@ public class FamilyResourceIT {
 
         UUID id = UUID.randomUUID();
 
-        FamilyDTO dto = Factory.createdFamilyDto();
+        FamilyDTO dto = Factory.createdFamilyDtoToInsert();
 
         String jsonBody = mapper.writeValueAsString(dto);
 
