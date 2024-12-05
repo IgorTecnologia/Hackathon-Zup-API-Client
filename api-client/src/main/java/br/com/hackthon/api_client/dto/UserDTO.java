@@ -65,7 +65,10 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     @JsonView({UserView.registrationPost.class, UserView.userPut.class})
     private String imageUrl;
 
+    @JsonView({UserView.registrationPost.class, UserView.userPut.class})
     private LocalDateTime collectionDate;
+
+    @JsonView({UserView.registrationPost.class, UserView.userPut.class})
     private LocalDateTime lastUpdateDate;
 
     @Valid
@@ -73,6 +76,18 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     private List<RoleDTO> roles = new ArrayList<>();
 
     public UserDTO(){
+    }
+
+    public UserDTO(UUID id, String username, String email, String password, String fullName, String phoneNumber, String cpf,
+                   String imageUrl) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.cpf = cpf;
+        this.imageUrl = imageUrl;
     }
 
     public UserDTO(User entity){
