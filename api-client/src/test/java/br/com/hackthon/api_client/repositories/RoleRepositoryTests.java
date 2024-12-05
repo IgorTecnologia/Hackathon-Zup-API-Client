@@ -96,7 +96,7 @@ public class RoleRepositoryTests {
     }
 
     @Test
-    public void deleteByIdShouldReturnDataBaseExceptionWhenIdExists(){
+    public void deleteByIdShouldThrowDataIntegrityViolationExceptionWhenIdExists(){
 
         Optional<Role> obj = repository.findAll().stream().findFirst();
 
