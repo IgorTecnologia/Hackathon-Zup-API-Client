@@ -4,7 +4,6 @@ import br.com.hackthon.api_client.dto.*;
 import br.com.hackthon.api_client.entities.*;
 import br.com.hackthon.api_client.repositories.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.cglib.core.*;
 
 import java.time.*;
 import java.util.*;
@@ -49,11 +48,21 @@ public class Factory {
         return entity;
     }
 
-    public static FamilyDTO createdFamilyDto(){
+    public static FamilyDTO createdFamilyDtoToInsert(){
 
         UUID id = UUID.randomUUID();
 
         FamilyDTO dto = new FamilyDTO(id, "Braga Luiz", "SP", "São Paulo", "Soares de Lima", 77, LocalDateTime.now(), LocalDateTime.now());
+
+        return dto;
+
+    }
+
+    public static FamilyDTO createdFamilyDtoToUpdate(){
+
+        UUID id = UUID.randomUUID();
+
+        FamilyDTO dto = new FamilyDTO(id, "Fernando Luiz", "SP", "São Paulo", "Soares de Souza", 777, LocalDateTime.now(), LocalDateTime.now());
 
         return dto;
 
@@ -103,6 +112,32 @@ public class Factory {
 
         UUID id = UUID.randomUUID();
         RoleDTO dto = new RoleDTO(id, "Partner");
+
+        return dto;
+    }
+
+    public static User createdUser(){
+
+        UUID id = UUID.randomUUID();
+        User entity = new User(id, "VictorTechnology", "victor@gmail.com", "1234567", "Victor Lima" , "+55 19 98765-4322", "123.654.789-1", "www.image.com", LocalDateTime.now(), LocalDateTime.now());
+
+        return entity;
+    }
+
+    public static UserDTO createdUserDtoToInsert(){
+
+        UUID id = UUID.randomUUID();
+
+        UserDTO dto = new UserDTO(id, "LucasTechnology", "lucas@gmail.com", "1234567", "Lucas Lima" , "+55 19 98765-4323", "123.654.789-2", "www.image.com");
+
+        return dto;
+    }
+
+    public static UserDTO createdUserDtoToUpdate(){
+
+        UUID id = UUID.randomUUID();
+
+        UserDTO dto = new UserDTO(id, "BrunoTechnology", "bruno@gmail.com", "1234567", "Bruno Lima" , "+55 19 98765-4324", "123.654.789-3", "www.image.com");
 
         return dto;
     }
