@@ -40,6 +40,31 @@ public class ChildrenRepositoryTests {
         Assertions.assertNotNull(page);
         Assertions.assertFalse(page.isEmpty());
     }
+
+    @Test
+    public void findByShouldReturnChildrenByIdWhenIdExists(){
+
+        Optional<Children> obj = repository.findAll().stream().findFirst();
+
+        UUID id = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + obj.get().getId())).getId();
+
+        Optional<Children> optional = repository.findById(id);
+
+        Assertions.assertNotNull(optional);
+        Assertions.assertFalse(optional.isEmpty());
+    }
+
+    @Test
+    public void findByIdShouldThrowResourceNotFoundExceptionWhenIdNonExisting(){
+
+        UUID id = UUID.randomUUID();
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            Optional<Children> obj = repository.findById(id);
+            throw new ResourceNotFoundException("Id not found: " + id);
+        });
+    }
+
     @Test
     public void findAllByFirstNameShouldReturnAllChildrenPagedByFirstNameWhenFirstNameExists(){
 
@@ -104,5 +129,16 @@ public class ChildrenRepositoryTests {
         repository.deleteById(id);
 
         Assertions.assertEquals(8, repository.count());
+    }
+
+    @Test
+    public void deleteByIdShouldThrowResourceNotFoundExceptionWhenIdNonExisting(){
+
+        UUID id = UUID.randomUUID();
+
+        Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+            repository.deleteById(id);
+            throw new ResourceNotFoundException("Id not found: " + id);
+        });
     }
 }
