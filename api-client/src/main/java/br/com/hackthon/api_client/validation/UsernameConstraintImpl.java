@@ -16,9 +16,6 @@ public class UsernameConstraintImpl implements ConstraintValidator<UsernameConst
 
     @Override
     public boolean isValid(String username, ConstraintValidatorContext context) {
-        if(username == null || username.trim().isEmpty() || username.contains(" ")){
-            return true;
-        }
 
         boolean existsByUsername = userRepository.existsByUsername(username);
         return !existsByUsername;
