@@ -145,9 +145,10 @@ public class PersonServiceImpl implements PersonService {
 
             if(dto.getFamily().getId() != null){
 
-                Family family = familyRepository.findById(dto.getFamily().getId())
-                        .orElseThrow(() -> new ResourceNotFoundException("Id not found: " + dto.getFamily().getId()));
+                Optional<Family> obj = familyRepository.findById(dto.getFamily().getId());
+                Family family = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + dto.getFamily().getId()));
                 entity.setFamily(family);
+                family.getMembers().add(entity);
             } else {
                 Family newFamily = new Family();
 
@@ -159,6 +160,7 @@ public class PersonServiceImpl implements PersonService {
                 newFamily.setCollectionDate(LocalDateTime.now(ZoneId.of("UTC")));
 
                 entity.setFamily(newFamily);
+                newFamily.getMembers().add(entity);
             }
         }
     }
