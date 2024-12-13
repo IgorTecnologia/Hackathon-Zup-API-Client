@@ -2,7 +2,6 @@ package br.com.hackthon.api_client.dto;
 
 import br.com.hackthon.api_client.entities.*;
 import com.fasterxml.jackson.annotation.*;
-import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.hateoas.*;
@@ -34,17 +33,15 @@ public class FamilyDTO extends RepresentationModel<FamilyDTO>  {
 
     @NotNull(message = "Address number field is mandatory.")
     @Min(value = 1, message = "Minimum characters 1.")
-    @Max(value = 9999, message = "Maximum characters 9999")
+    @Max(value = 9999, message = "Maximum characters 9999.")
     private Integer addressNumber;
 
     private LocalDateTime collectionDate;
 
     private LocalDateTime lastUpdateDate;
 
-    @Valid
     private List<PersonDTO> members = new ArrayList<>();
 
-    @Valid
     private List<ChildrenDTO> children = new ArrayList<>();
 
     public FamilyDTO(){
