@@ -18,12 +18,12 @@ public class RoleDTO extends RepresentationModel<RoleDTO> {
         public static interface RolePut { }
     }
 
-    @JsonView({UserDTO.UserView.registrationPost.class, UserDTO.UserView.userPut.class})
+    @JsonView({UserDTO.UserView.registrationPost.class, UserDTO.UserView.userPut.class, RoleView.RegistrationPost.class, RoleView.RolePut.class})
     private UUID id;
 
-    @Size(min = 4, max = 70, message = "Minimum characters 4 and maximum 70.")
-    @NotNull(message = "The authority field is mandatory.")
-    @AuthorityConstraint(message = "Invalid authority, already exists.")
+    @Size(min = 4, max = 70, message = "Minimum characters 4 and maximum 70.", groups = {RoleView.RegistrationPost.class, RoleView.RolePut.class})
+    @NotNull(message = "The authority field is mandatory.", groups = {RoleView.RegistrationPost.class, RoleView.RolePut.class})
+    @AuthorityConstraint(message = "Invalid authority, already exists.", groups = {RoleView.RegistrationPost.class, RoleView.RolePut.class})
     @JsonView({RoleView.RegistrationPost.class, RoleView.RolePut.class, UserDTO.UserView.registrationPost.class, UserDTO.UserView.userPut.class})
     private String authority;
 
