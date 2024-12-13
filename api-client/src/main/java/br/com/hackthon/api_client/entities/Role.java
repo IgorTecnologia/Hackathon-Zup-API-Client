@@ -1,6 +1,5 @@
 package br.com.hackthon.api_client.entities;
 
-import br.com.hackthon.api_client.dto.*;
 import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
