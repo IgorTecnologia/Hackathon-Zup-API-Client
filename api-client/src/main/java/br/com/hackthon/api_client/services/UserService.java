@@ -21,7 +21,7 @@ public interface UserService {
 
     UserDTO update(UUID id, UserDTO dto);
 
-    Object passwordUpdate(UUID id, UserDTO dto);
+    void passwordUpdate(UUID id, UserDTO dto);
 
     void deleteById(UUID id);
 }
