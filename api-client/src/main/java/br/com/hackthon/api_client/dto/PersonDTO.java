@@ -16,24 +16,24 @@ public class PersonDTO extends RepresentationModel<PersonDTO> {
 
     private UUID id;
 
-    @NotBlank(message = "First name field is mandatory.")
+    @NotBlank(message = "First name field is mandatory and blanks are not allowed.")
     @Size(min = 2, max = 70, message = "Minimum characters 2 and maximum 70.")
     private String firstName;
 
-    @NotNull(message = "Last name field is mandatory.")
+    @NotNull(message = "Last name field is mandatory and blanks are not allowed.")
     @Size(min = 2, max = 70, message = "Minimum characters 2 and maximum 70.")
     private String lastName;
 
-    @NotNull(message = "The date birth field is mandatory.")
+    @NotNull(message = "The date birth field is mandatory. Ex: yyyy-MM-dd")
     private LocalDate dateBirth;
 
-    @NotNull(message = "Age field is mandatory and cannot be null.")
+    @NotNull(message = "Age field is mandatory.")
     @Min(value = 1, message = "Minimum value 1.")
     @Max(value = 170, message = "Maximum value 170.")
     private Integer age;
 
     @CpfConstraint(message = "Invalid, existing CPF.")
-    @NotNull(message = "CPF field is mandatory and cannot be null.")
+    @NotNull(message = "CPF field is mandatory.")
     @Size(min = 10, max = 20, message = "Minimum characters 10 and maximum 20.")
     private String cpf;
 
