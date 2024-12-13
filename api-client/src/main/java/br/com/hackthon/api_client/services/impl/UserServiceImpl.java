@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService {
         return new UserDTO(entity, entity.getRoles());
     }
 
+    @Transactional
     @Override
     public UserDTO insert(UserDTO dto) {
 
@@ -85,15 +86,13 @@ public class UserServiceImpl implements UserService {
         return new UserDTO(entity, entity.getRoles());
     }
 
+    @Transactional
     @Override
     public UserDTO update(UUID id, UserDTO dto) {
 
         Optional<User> obj = repository.findById(id);
         User entity = obj.orElseThrow(() -> new ResourceNotFoundException("Id not found: " + id));
-        entity.setFullName(dto.getFullName());
-        entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.setCpf(dto.getCpf());
-        entity.setImageUrl(dto.getImageUrl());
+        copyDtoToEntity(entity, dto);
         entity.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
         repository.save(entity);
 
@@ -101,24 +100,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO passwordUpdate(UUID id, UserDTO dto) {
+    public void passwordUpdate(UUID id, UserDTO dto) {
 
         Optional<User> obj = repository.findById(id);
         if(!obj.isPresent()){
             throw new ResourceNotFoundException(("Id not found: ") + id);
         }if(!obj.get().getPassword().equals(dto.getOldPassword())){
-            throw new ResourceNotFoundException(("Error: Mismatched old password!"));
+            throw new BadRequestException(("Error: Mismatched old password!"));
         }else{
             User entity = obj.get();
             entity.setPassword(dto.getPassword());
             entity.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
             repository.save(entity);
-
-            return new UserDTO(entity);
         }
-
     }
-
 
     @Override
     public void deleteById(UUID id) {
@@ -132,13 +127,33 @@ public class UserServiceImpl implements UserService {
 
     void copyDtoToEntity(User entity, UserDTO dto) {
 
-        entity.setUsername(dto.getUsername());
-        entity.setEmail(dto.getEmail());
-        entity.setPassword(dto.getPassword());
-        entity.setFullName(dto.getFullName());
-        entity.setPhoneNumber(dto.getPhoneNumber());
-        entity.setCpf(dto.getCpf());
-        entity.setImageUrl(dto.getImageUrl());
+        if(dto.getUsername() != null){
+            entity.setUsername(dto.getUsername());
+        }
+
+        if(dto.getEmail() != null){
+            entity.setEmail(dto.getEmail());
+        }
+
+        if(dto.getPassword() != null){
+            entity.setPassword(dto.getPassword());
+        }
+
+        if(dto.getFullName() != null){
+            entity.setFullName(dto.getFullName());
+        }
+
+        if(dto.getPhoneNumber() != null){
+            entity.setPhoneNumber(dto.getPhoneNumber());
+        }
+
+        if(dto.getCpf() != null){
+            entity.setCpf(dto.getCpf());
+        }
+
+        if(dto.getImageUrl() != null){
+            entity.setImageUrl(dto.getImageUrl());
+        }
 
         entity.getRoles().clear();
 
