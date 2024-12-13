@@ -3,6 +3,7 @@ package br.com.hackthon.api_client.resources;
 import br.com.hackthon.api_client.dto.*;
 import br.com.hackthon.api_client.repositories.*;
 import br.com.hackthon.api_client.services.impl.*;
+import jakarta.validation.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
 import org.springframework.http.*;
@@ -65,14 +66,14 @@ public class FamilyResource {
     }
 
     @PostMapping
-    public ResponseEntity<FamilyDTO> insert(@RequestBody FamilyDTO dto){
+    public ResponseEntity<FamilyDTO> insert(@RequestBody @Valid FamilyDTO dto){
 
         dto = service.insert(dto);
         return ResponseEntity.ok().body(dto);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<FamilyDTO> update(@PathVariable UUID id, @RequestBody FamilyDTO dto){
+    public ResponseEntity<FamilyDTO> update(@PathVariable UUID id, @RequestBody @Valid FamilyDTO dto){
 
         dto = service.update(id, dto);
         return ResponseEntity.ok().body(dto);
