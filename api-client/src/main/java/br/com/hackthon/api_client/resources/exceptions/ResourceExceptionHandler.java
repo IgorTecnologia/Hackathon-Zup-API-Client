@@ -30,6 +30,22 @@ public class ResourceExceptionHandler {
 
     }
 
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<StandardError> badRequest(BadRequestException e, HttpServletRequest request){
+
+        StandardError err = new StandardError();
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+
+        err.setTimeStamp(Instant.now());
+        err.setStatus(status.value());
+        err.setError("Bad request exception.");
+        err.setMessage(e.getMessage());
+        err.setPath(request.getRequestURI());
+
+        return ResponseEntity.status(status).body(err);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidatorError> validation(MethodArgumentNotValidException e, HttpServletRequest request){
 
