@@ -22,9 +22,6 @@ public class CpfConstraintImpl implements ConstraintValidator<CpfConstraint, Str
 
     @Override
     public boolean isValid(String cpf, ConstraintValidatorContext context) {
-        if(cpf == null || cpf.trim().isEmpty() || cpf.contains(" ")){
-            return true;
-        }
 
         boolean cpfExistsInPerson = repository.existsByCpf(cpf);
         boolean cpfExistsInChildren = childrenRepository.existsByCpf(cpf);
