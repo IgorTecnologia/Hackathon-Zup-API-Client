@@ -64,24 +64,27 @@ public class UserResource {
 
     @PostMapping
     public ResponseEntity<UserDTO> insert(@JsonView(UserDTO.UserView.registrationPost.class)
-                                          @Validated(UserDTO.UserView.registrationPost.class)
-                                          @RequestBody @Valid UserDTO dto){
+                                          @Validated({UserDTO.UserView.registrationPost.class, RoleDTO.RoleView.RegistrationPost.class})
+                                          @Valid @RequestBody UserDTO dto){
 
         dto = service.insert(dto);
         return ResponseEntity.ok().body(dto);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> update(@PathVariable UUID id, @RequestBody UserDTO dto){
+    public ResponseEntity<UserDTO> update(@PathVariable UUID id,
+                                          @JsonView(UserDTO.UserView.userPut.class)
+                                          @Validated(UserDTO.UserView.userPut.class)
+                                          @Valid @RequestBody UserDTO dto){
 
         dto = service.update(id, dto);
         return ResponseEntity.ok().body(dto);
     }
 
-    @PutMapping("/password/{id}")
+    @PutMapping("/{id}/password")
     public ResponseEntity<Object> passwordUpdate(@PathVariable UUID id, @RequestBody UserDTO dto){
 
-        dto = service.passwordUpdate(id, dto);
+        service.passwordUpdate(id, dto);
         return ResponseEntity.ok().body("Password update successfully.");
     }
 
