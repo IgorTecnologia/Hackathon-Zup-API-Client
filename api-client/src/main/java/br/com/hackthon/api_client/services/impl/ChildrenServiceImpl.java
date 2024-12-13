@@ -132,6 +132,7 @@ public class ChildrenServiceImpl implements ChildrenService {
                 Family family = familyRepository.findById(dto.getFamily().getId())
                         .orElseThrow(() -> new ResourceNotFoundException("Id not found: " + dto.getFamily().getId()));
                 entity.setFamily(family);
+                family.getChildren().add(entity);
             } else {
                 Family newFamily = new Family();
                 newFamily.setLastName(dto.getFamily().getLastName());
