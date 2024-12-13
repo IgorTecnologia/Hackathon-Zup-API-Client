@@ -1,6 +1,5 @@
 package br.com.hackthon.api_client.entities;
 
-import org.checkerframework.checker.units.qual.*;
 import org.junit.jupiter.api.*;
 
 import java.time.*;
