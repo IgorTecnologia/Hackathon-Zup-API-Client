@@ -65,10 +65,8 @@ public class UserDTO extends RepresentationModel<UserDTO> {
     @JsonView({UserView.registrationPost.class, UserView.userPut.class})
     private String imageUrl;
 
-    @JsonView({UserView.registrationPost.class, UserView.userPut.class})
-    private LocalDateTime collectionDate;
 
-    @JsonView({UserView.registrationPost.class, UserView.userPut.class})
+    private LocalDateTime collectionDate;
     private LocalDateTime lastUpdateDate;
 
     @JsonView({UserView.registrationPost.class, UserView.userPut.class})
