@@ -16,9 +16,6 @@ public class EmailConstraintImpl implements ConstraintValidator<EmailConstraint,
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-        if(email == null || email.trim().isEmpty() || email.contains(" ")){
-            return true;
-        }
 
         boolean existsByEmail = userRepository.existsByEmail(email);
         return !existsByEmail;
