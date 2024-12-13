@@ -16,9 +16,6 @@ public class AuthorityConstraintImpl implements ConstraintValidator<AuthorityCon
 
     @Override
     public boolean isValid(String authority, ConstraintValidatorContext context) {
-        if(authority == null || authority.trim().isEmpty() || authority.contains(" ")){
-            return true;
-        }
 
         boolean existsByAuthority = roleRepository.existsByAuthority(authority);
         return !existsByAuthority;
