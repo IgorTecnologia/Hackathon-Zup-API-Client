@@ -18,7 +18,7 @@ public class RoleDTO extends RepresentationModel<RoleDTO> {
         public static interface RolePut { }
     }
 
-    @JsonView({UserDTO.UserView.registrationPost.class, UserDTO.UserView.userPut.class, RoleView.RegistrationPost.class, RoleView.RolePut.class})
+    @JsonView({UserDTO.UserView.registrationPost.class, UserDTO.UserView.userPut.class})
     private UUID id;
 
     @Size(min = 4, max = 70, message = "Minimum characters 4 and maximum 70.", groups = {RoleView.RegistrationPost.class, RoleView.RolePut.class})
