@@ -16,7 +16,7 @@ public class ChildrenDTO extends RepresentationModel<ChildrenDTO> {
 
     private UUID id;
 
-    @NotBlank(message = "First name field is mandatory.")
+    @NotBlank(message = "First name field is mandatory and blanks are not allowed.")
     @Size(min = 2, max = 70, message = "Minimum characters 2 and maximum 70.")
     private String firstName;
 
@@ -24,16 +24,16 @@ public class ChildrenDTO extends RepresentationModel<ChildrenDTO> {
     @Size(min = 2, max = 70, message = "Minimum characters 2 and maximum 70.")
     private String lastName;
 
-    @NotNull(message = "The date birth field is mandatory.")
+    @NotNull(message = "The date birth field is mandatory. Ex: yyyy-MM-dd")
     private LocalDate dateBirth;
 
-    @NotNull(message = "Age field is mandatory and cannot be null.")
-    @Min(value = 1, message = "Minimum value 1.")
+    @NotNull(message = "Age field is mandatory.")
+    @Min(value = 0, message = "Minimum value 0.")
     @Max(value = 170, message = "Maximum value 170.")
     private Integer age;
 
-    @CpfConstraint(message = "Invalid, existing CPF.")
-    @NotNull(message = "CPF field is mandatory and cannot be null.")
+    @CpfConstraint(message = "CPF is already in use.")
+    @NotBlank(message = "The CPF field is mandatory and blank spaces are not allowed.")
     @Size(min = 10, max = 20, message = "Minimum characters 10 and maximum 20.")
     private String cpf;
 
